@@ -20,18 +20,24 @@ const SectionHeader: React.FC<{title: string}> = ({ title }) => (
 
 const RewardsSection: React.FC = () => {
     const rewards = [
-        { name: "Coffee Shop", img: "https://picsum.photos/seed/coffee/200" },
-        { name: "Bookstore", img: "https://picsum.photos/seed/books/200" },
-        { name: "Cinema", img: "https://picsum.photos/seed/cinema/200" },
+        { name: "Coffee Shop", img: "https://picsum.photos/seed/coffee/200/300", overlay: "20% Off" },
+        { name: "Bookstore", img: "https://picsum.photos/seed/books/200/300", overlay: "Exchange 1,000 Pts" },
+        { name: "Cinema", img: "https://picsum.photos/seed/cinema/200/300", overlay: "$5 Coupon" },
+        { name: "Groceries", img: "https://picsum.photos/seed/grocery/200/300", overlay: "5% eMoney Cashback" },
     ];
     return (
         <div>
             <SectionHeader title="Rewards" />
-            <div className="flex space-x-4 overflow-x-auto pb-2 -mx-4 px-4">
+            <div className="flex space-x-4 overflow-x-auto pb-2 -mx-4 px-4" style={{ scrollSnapType: 'x mandatory' }}>
                 {rewards.map(reward => (
-                    <div key={reward.name} className="flex-shrink-0 w-28 text-center">
-                        <img src={reward.img} alt={reward.name} className="w-28 h-28 rounded-2xl object-cover shadow-md" />
-                        <p className="mt-2 text-sm font-semibold text-gray-700">{reward.name}</p>
+                    <div key={reward.name} className="relative flex-shrink-0 w-36 group" style={{ scrollSnapAlign: 'start' }}>
+                        <img src={reward.img} alt={reward.name} className="w-full h-48 rounded-2xl object-cover shadow-md brightness-75 group-hover:brightness-90 transition-all" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-2xl flex flex-col justify-end p-3 text-white">
+                            <h3 className="font-bold text-md leading-tight">{reward.name}</h3>
+                             <div className="mt-1 bg-white/20 backdrop-blur-sm rounded-md px-2 py-1 text-center">
+                                <p className="text-white text-xs font-bold">{reward.overlay}</p>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -57,17 +63,16 @@ const NewsCard: React.FC = () => (
 const WalletScreen: React.FC<WalletScreenProps> = ({ onBalanceClick }) => {
   return (
     <div className="bg-gray-50">
-      {/* Sticky Hero section */}
-      <div className="sticky top-0 z-10 bg-gray-50 pt-1">
-         <WalletHero onBalanceClick={onBalanceClick} />
+      {/* Combined Wallet and Loyalty Card */}
+      <WalletHero onBalanceClick={onBalanceClick} />
+
+      {/* Core Features */}
+      <div className="py-4">
+          <CoreFeatures />
       </div>
 
-      <div className="p-4">
-        <CoreFeatures />
-      </div>
-
-      <div className="bg-white rounded-t-3xl p-4 space-y-6">
-        <LoyaltyCard />
+      {/* Scrollable Content */}
+      <div className="p-4 space-y-6 bg-white rounded-t-3xl">
         <ServicesGrid />
         <HorizontalBanner />
         <PromoClaimsSection />

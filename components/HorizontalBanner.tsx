@@ -8,14 +8,14 @@ const HorizontalBanner: React.FC = () => {
     { title: 'Pay Bills, Win Prizes', subtitle: 'Chance to win a new phone', bgColor: 'bg-orange-500' },
   ];
 
+  const firstBanner = banners[0];
+
   return (
-    <div className="flex space-x-4 overflow-x-auto pb-2 -mx-4 px-4" style={{ scrollSnapType: 'x mandatory' }}>
-      {banners.map((banner, index) => (
-        <div key={index} className={`flex-shrink-0 w-4/5 rounded-2xl p-4 text-white ${banner.bgColor} shadow-lg`} style={{ scrollSnapAlign: 'start' }}>
-          <h3 className="font-bold text-lg">{banner.title}</h3>
-          <p className="text-sm opacity-90">{banner.subtitle}</p>
-        </div>
-      ))}
+    <div>
+      <div className={`w-full h-40 rounded-2xl p-5 flex flex-col justify-center text-white ${firstBanner.bgColor} shadow-lg`}>
+        <h3 className="font-bold text-xl">{firstBanner.title}</h3>
+        <p className="text-sm opacity-90 mt-1">{firstBanner.subtitle}</p>
+      </div>
     </div>
   );
 };

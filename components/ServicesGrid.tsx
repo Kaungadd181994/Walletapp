@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Icon from './Icon';
 import type { Feature } from '../types';
@@ -27,7 +28,7 @@ const ServicesGrid: React.FC = () => {
   return (
     <div>
       <SectionHeader title="Services" />
-      <div className="bg-gray-100 p-4 rounded-2xl">
+      <div>
         <div className="grid grid-cols-5 gap-y-4 gap-x-2">
             {services.map((feature) => (
             <div key={feature.name} className="flex flex-col items-center space-y-2 text-center cursor-pointer group">
